@@ -6,5 +6,10 @@ module Types
     def test_field
       "Hello World"
     end
+    field :user, String, null: false,
+      description: 'The user field'
+    def user
+      'Hello user'
+    end
   end
 end

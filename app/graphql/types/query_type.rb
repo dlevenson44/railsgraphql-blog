@@ -26,5 +26,13 @@ module Types
     def post(id:)
       Post.where(id: id).first
     end
+
+    field :comment, Types::CommentType, null: true, description: 'One comment' do
+      argument :id, ID, required: true
+    end
+
+    def comment(id:)
+      Comment.where(id: id).first
+    end
   end
 end

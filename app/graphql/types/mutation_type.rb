@@ -6,15 +6,20 @@ module Types
     def test_field
       "Hello World"
     end
-    field :user, String, null: false,
-      description: 'The user field'
+
+    field :user, String, null: false, description: 'The user field'
     def user
       'Hello user'
     end
-    field :post, String, null: false,
-      description: 'The post field'
+
+    field :post, String, null: false, description: 'The post field'
     def post
       'hello post'
+    end
+
+    field :comment, String, null: false, description: 'The comment field'
+    def comment
+      'hello comment'
     end
   end
 end

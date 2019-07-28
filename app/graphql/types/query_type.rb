@@ -18,5 +18,13 @@ module Types
     def user(id:)
       User.where(id: id).first
     end
+
+    field :post, Types::PostType, null: true, description: 'One post' do
+      argument :id, ID, required: true
+    end
+
+    def post(id:)
+      Post.where(id: id).first
+    end
   end
 end

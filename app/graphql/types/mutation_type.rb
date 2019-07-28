@@ -11,5 +11,10 @@ module Types
     def user
       'Hello user'
     end
+    field :post, String, null: false,
+      description: 'The post field'
+    def post
+      'hello post'
+    end
   end
 end

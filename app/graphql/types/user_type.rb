@@ -10,4 +10,6 @@ class Types::UserType < Types::BaseObject
   field :zipcode, Integer, null: true
   field :country, String, null: true
   field :full_address, String, null: true
+
+  field :posts, [Types::PostType], null: false, description: 'Users posts'
 end

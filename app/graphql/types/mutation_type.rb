@@ -72,5 +72,30 @@ module Types
     def comment
       'hello comment'
     end
+
+    field :create_comment, CommentType, null: true, description: 'Create a comment' do
+      argument :comment, Types::CommentInputType, required: true
+    end
+
+    def create_comment(comment:)
+      Comment.create comment.to_h
+    end
+
+    field :update_comment, Boolean, null: false, description: 'Update comment' do
+      argument :comment, Types::CommentInputType, required: true, description: 'all attributes to update comment'
+    end
+
+    def update_comment(comment:)
+      existing = Comment.where(id: comment[:id]).first
+      existing.update comment.to_h
+    end
+
+    field :delete_comment, Boolean, null: false, description: 'delete comment' do
+      argument :id, ID, required: true
+    end
+
+    def delete_comment(id:)
+      Comment.where(id: id).destroy_all
+    end
   end
 end

@@ -24,7 +24,7 @@ module Types
       argument :user, Types::UserInputType, required: true
     end
 
-    def update_author(user:)
+    def update_user(user:)
       existing = User.where(id: user[:id]).first
       existing.update user.to_h
     end
@@ -41,6 +41,31 @@ module Types
     field :post, String, null: false, description: 'The post field'
     def post
       'hello post'
+    end
+
+    field :create_post, PostType, null: true, description: 'Create a post' do
+      argument :post, Types::PostInputType, required: true
+    end
+
+    def create_post(post:)
+      Post.create post.to_h
+    end
+
+    field :update_post, Boolean, null: false, description: 'Update post' do
+      argument :post, Types::PostInputType, required: true, description: 'all attributes to update post'
+    end
+
+    def update_post(post:)
+      existing = Post.where(id: post[:id]).first
+      existing.update post.to_h
+    end
+
+    field :delete_post, Boolean, null: false, description: 'delete post' do
+      argument :id, ID, required: true
+    end
+
+    def delete_post(id:)
+      Post.where(id: id).destroy_all
     end
 
     field :comment, String, null: false, description: 'The comment field'

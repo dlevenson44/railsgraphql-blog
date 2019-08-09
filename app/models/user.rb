@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :posts
+  has_secure_password
+  has_many :posts, :sessions
   validates :first_name, :last_name, presence: true
 
   def full_address

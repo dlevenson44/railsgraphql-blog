@@ -8,6 +8,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :city
       t.integer :zipcode
       t.string :country
+      t.string :email
+      t.string :password_digest
 
       t.timestamps
     end

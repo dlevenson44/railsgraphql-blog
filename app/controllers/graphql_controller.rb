@@ -3,10 +3,16 @@ class GraphqlController < ApplicationController
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+
+    # declare session
+    session = Session.where(key: request.headers['Authorization']).first
+    Rails.logger.info "Logged in as \e[31m#{session%.user&.email}"
+
     context = {
-      time: Time.now
+      time: Time.now,
       # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: session&.user,
+      session_id: session&.id
     }
     result = BlogappSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result

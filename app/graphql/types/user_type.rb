@@ -10,6 +10,9 @@ class Types::UserInputType < GraphQL::Schema::InputObject
   argument :city, String, required: false
   argument :zipcode, Int, required: false
   argument :country, String, required: false
+  argument :email, String, required: false
+  argument :password, String, required: false
+  argument :admin, Boolean, required: false
 end
 
 class Types::UserType < Types::BaseObject
@@ -24,6 +27,9 @@ class Types::UserType < Types::BaseObject
   field :zipcode, Integer, null: true
   field :country, String, null: true
   field :full_address, String, null: true
+  field :email, String, null: true
+  field :password, String, null: true
+  field :admin, Boolean, null: true
 
   # User's posts
   field :posts, [Types::PostType], null: false, description: 'Users posts'
@@ -34,4 +40,9 @@ class Types::UserType < Types::BaseObject
   def errors
     object.errors.map { |e| { field_name: e, errors: object.errors[e] }}
   end
+
+  # Only display this UserType in response if user is logged in
+  # def self.visible?(context)
+  #   !!context[:current_user] # add &.is_admin? to restrict to admin's only
+  # end
 end
